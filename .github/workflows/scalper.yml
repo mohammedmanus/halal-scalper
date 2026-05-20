@@ -1,0 +1,78 @@
+name: Scalper Bot
+
+
+
+on:
+
+  schedule:
+  
+    - cron: '*/15 * * * *'
+    
+  workflow_dispatch:
+  
+
+
+jobs:
+
+  trade:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - name: Checkout code
+      
+        uses: actions/checkout@v2
+        
+
+
+      - name: Set up Python
+      
+        uses: actions/setup-python@v2
+        
+        with:
+        
+          python-version: '3.9'
+          
+
+
+      - name: Install dependencies
+      
+        run: pip install ccxt requests
+        
+
+
+      - name: Run Scalper
+      
+        env:
+        
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          
+          BINANCE_SECRET: ${{ secrets.BINANCE_SECRET }}
+          
+          PROXY_URL: ${{ secrets.PROXY_URL }}
+          
+        run: python final_halal_scalper_v5.py
+        
+concurrency: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
